@@ -162,26 +162,3 @@ resource "aws_s3_bucket_public_access_block" "backups" {
   restrict_public_buckets = true
 }
 
-# Lifecycle rules for backups bucket
-resource "aws_s3_bucket_lifecycle_configuration" "backups" {
-  bucket = aws_s3_bucket.backups.id
-
-  rule {
-    id     = "transition-old-backups"
-    status = "Enabled"
-
-    transition {
-      days          = 30
-      storage_class = "GLACIER"
-    }
-
-    transition {
-      days          = 90
-      storage_class = "DEEP_ARCHIVE"
-    }
-
-    expiration {
-      days = 365
-    }
-  }
-}
