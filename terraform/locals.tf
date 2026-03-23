@@ -19,6 +19,6 @@ locals {
   
   # Bucket-specific configurations
   bucket_configs = {
-    data    = { versioning = false, encryption = true }
+    data    = { versioning = true, encryption = true }
   }
 }
